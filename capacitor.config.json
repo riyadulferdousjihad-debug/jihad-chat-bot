@@ -1,0 +1,8 @@
+{
+  "appId": "com.jihad.personalassistant",
+  "appName": "JIHAD CHAT BOT",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https"
+  }
+}
