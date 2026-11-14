@@ -1,326 +1,59 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b5d66">
-<title>JIHAD CHAT BOT PERSONAL ASSISTANT</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
-<style>
-:root{--bg:#f2f5f7;--panel:#fff;--side:#0b3a40;--side-t:#d6ecee;--ink:#14262a;--mute:#66797d;--line:#dbe4e7;--brand:#0b5d66;--brand2:#e8a33d;--user:#0b5d66;--user-t:#fff;--bot:#fff;--code:#0f2a2e;--r:14px;color-scheme:light}
-:root[data-theme=dark]{--bg:#0c1618;--panel:#122024;--side:#081113;--side-t:#b9d3d6;--ink:#e4f0f1;--mute:#8aa3a7;--line:#1f3438;--brand:#2bb3c0;--user:#14707a;--bot:#16282c;--code:#07191b;color-scheme:dark}
-*{box-sizing:border-box;margin:0}
-html,body{height:100%}
-body{font-family:'Hind Siliguri',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.65;overflow:hidden}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-button:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--brand2);outline-offset:2px}
-.app{display:flex;height:100%;padding-top:env(safe-area-inset-top,0px)}
-aside{width:290px;background:var(--side);color:var(--side-t);display:flex;flex-direction:column;flex-shrink:0;transition:transform .25s}
-.brand{padding:18px 16px 12px;display:flex;gap:10px;align-items:center}
-.logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(140deg,var(--brand2),#c9741f);display:grid;place-items:center;font-weight:700;color:#1b1204;font-size:20px;flex-shrink:0}
-.brand b{font-size:13.5px;line-height:1.25;letter-spacing:.02em;color:#fff}
-.brand small{display:block;color:var(--side-t);opacity:.7;font-size:12px}
-.newchat{margin:6px 14px 10px;padding:10px;border-radius:11px;background:var(--brand2);color:#1b1204;font-weight:600}
-.hist{flex:1;overflow:auto;padding:0 8px}
-.hi{display:flex;align-items:center;gap:4px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:14.5px}
-.hi:hover,.hi.on{background:rgba(255,255,255,.09)}
-.hi span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hi button{opacity:.55;padding:2px 6px;border-radius:6px}.hi button:hover{opacity:1;background:rgba(255,255,255,.12)}
-.sfoot{padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.1);display:flex;gap:8px}
-.sfoot button{flex:1;padding:8px;border-radius:9px;background:rgba(255,255,255,.08);font-size:14px}
-main{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--bg)}
-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
-header h1{font-size:15.5px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ib{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px}.ib:hover{background:var(--bg)}
-.menu{display:none}
-#msgs{flex:1;overflow:auto;padding:18px 14px 8px;scroll-behavior:smooth}
-.wrap{max-width:820px;margin:0 auto}
-.hero{padding:6vh 0 10px}
-.hero h2{font-size:clamp(26px,5vw,40px);line-height:1.2;font-weight:700;color:var(--brand)}
-.hero p{color:var(--mute);margin:8px 0 20px;max-width:46ch}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips button{padding:8px 14px;border:1px solid var(--line);background:var(--panel);border-radius:99px;font-size:14.5px}.chips button:hover{border-color:var(--brand)}
-.m{display:flex;margin:14px 0}.m.user{justify-content:flex-end}
-.b{max-width:88%;padding:11px 15px;border-radius:var(--r);overflow-wrap:anywhere}
-.user .b{background:var(--user);color:var(--user-t);border-bottom-right-radius:4px;white-space:pre-wrap}
-.model .b{background:var(--bot);border:1px solid var(--line);border-bottom-left-radius:4px;max-width:100%;width:fit-content}
-.b p{margin:.5em 0}.b p:first-child{margin-top:0}.b p:last-child{margin-bottom:0}
-.b ul,.b ol{padding-left:1.4em;margin:.5em 0}
-.b a{color:var(--brand)}
-.b table{border-collapse:collapse;display:block;overflow-x:auto;margin:.6em 0}.b td,.b th{border:1px solid var(--line);padding:5px 10px}
-.b code{background:var(--bg);padding:1px 6px;border-radius:5px;font-size:.9em}
-.b pre{position:relative;background:var(--code);color:#d6f1f3;padding:14px;border-radius:10px;overflow-x:auto;margin:.7em 0}.b pre code{background:none;padding:0;color:inherit}
-.cp{position:absolute;top:6px;right:6px;font-size:12px;background:rgba(255,255,255,.12);color:#fff;padding:2px 8px;border-radius:6px}
-.fl{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-.fl img{max-height:140px;border-radius:9px;max-width:100%}
-.tag{font-size:13px;background:rgba(127,127,127,.18);padding:2px 9px;border-radius:7px}
-.src{margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px;color:var(--mute);display:flex;flex-wrap:wrap;gap:6px}
-.src a{background:var(--bg);padding:2px 9px;border-radius:99px;text-decoration:none;color:var(--brand)}
-.act{display:flex;gap:4px;margin-top:6px}.act button{font-size:13px;color:var(--mute);padding:2px 8px;border-radius:7px}.act button:hover{background:var(--panel)}
-.dots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mute);margin:0 2px;animation:d 1s infinite}.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
-@keyframes d{50%{transform:translateY(-4px);opacity:.4}}
-.comp{padding:8px 14px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 25%)}
-.box{max-width:820px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:8px;box-shadow:0 4px 18px rgba(8,40,45,.08)}
-#pend{display:flex;flex-wrap:wrap;gap:6px;padding:2px 4px 6px}
-#pend .tag{display:flex;gap:6px;align-items:center;background:var(--bg)}#pend img{height:26px;border-radius:5px}
-.row{display:flex;align-items:flex-end;gap:2px}
-textarea{flex:1;resize:none;border:0;background:none;color:var(--ink);font:inherit;padding:8px 6px;max-height:160px;outline:0}
-.send{background:var(--brand);color:#fff;width:40px;height:40px;border-radius:12px}
-.mic.on{background:#d6453d;color:#fff;animation:p 1.2s infinite}@keyframes p{50%{opacity:.6}}
-.note{text-align:center;font-size:12px;color:var(--mute);margin-top:6px}
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:20;align-items:center;justify-content:center;padding:14px}.ov.show{display:flex}
-.modal{background:var(--panel);border-radius:18px;width:min(560px,100%);max-height:92vh;overflow:auto;padding:20px}
-.modal h3{margin-bottom:12px}.modal label{display:block;font-size:14px;font-weight:600;margin:12px 0 4px}
-.modal input[type=password],.modal input[type=text],.modal select,.modal textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
-.modal textarea{min-height:130px}
-.chk{display:flex;gap:8px;align-items:center;font-weight:400!important;margin:8px 0!important}
-.mb{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}.mb button{padding:9px 18px;border-radius:10px;background:var(--bg)}.mb .pri{background:var(--brand);color:#fff}
-.help{font-size:13px;color:var(--mute)}.help a{color:var(--brand)}
-#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#14262a;color:#fff;padding:9px 16px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:30}#toast.show{opacity:1}
-.scrim{display:none}
-@media(max-width:820px){
-aside{position:fixed;inset:0 auto 0 0;z-index:15;transform:translateX(-100%);width:min(300px,85vw)}
-aside.open{transform:none}.scrim.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:12}
-.menu{display:grid}.b{max-width:94%}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
-</head>
-<body>
-<div class="app">
-<aside id="side">
-  <div class="brand"><div class="logo">J</div><div><b>JIHAD CHAT BOT<br>PERSONAL ASSISTANT</b><small>আপনার ব্যক্তিগত AI সহকারী</small></div></div>
-  <button class="newchat" id="newBtn">+ নতুন চ্যাট</button>
-  <div class="hist" id="hist"></div>
-  <div class="sfoot"><button id="setBtn">⚙ সেটিংস</button><button id="clrBtn">🗑 সব মুছুন</button></div>
-</aside>
-<div class="scrim" id="scrim"></div>
-<main>
-  <header>
-    <button class="ib menu" id="menuBtn" aria-label="মেনু">☰</button>
-    <h1 id="title">নতুন চ্যাট</h1>
-    <button class="ib" id="themeBtn" aria-label="থিম">◐</button>
-  </header>
-  <div id="msgs"><div class="wrap" id="list"></div></div>
-  <div class="comp">
-    <div class="box">
-      <div id="pend"></div>
-      <div class="row">
-        <button class="ib" id="attBtn" aria-label="ফাইল যোগ করুন" title="ছবি / PDF / ফাইল">📎</button>
-        <textarea id="in" rows="1" placeholder="বাংলা বা English-এ লিখুন…"></textarea>
-        <button class="ib mic" id="micBtn" aria-label="ভয়েসে বলুন" title="ভয়েসে বলুন">🎤</button>
-        <button class="ib send" id="sendBtn" aria-label="পাঠান">➤</button>
-      </div>
-    </div>
-    <div class="note">AI ভুল করতে পারে — গুরুত্বপূর্ণ তথ্য যাচাই করুন।</div>
-  </div>
-</main>
-</div>
-<input type="file" id="file" hidden multiple accept="image/*,.pdf,.txt,.md,.csv,.json,.js,.py,.html,.css,.xml,.log">
+jihad-chatbot/
+├─ backend/
+│  ├─ main.py
+│  ├─ database.py
+│  ├─ models.py
+│  ├─ schemas.py
+│  ├─ gemini_service.py
+│  ├─ requirements.txt
+│  ├─ .env.example
+│  └─ uploads/
+├─ web/
+│  ├─ package.json
+│  ├─ vite.config.js
+│  ├─ index.html
+│  └─ src/
+│     ├─ main.jsx
+│     ├─ App.jsx
+│     ├─ api.js
+│     └─ styles.css
+└─ android/
+   └─ jihad_chatbot/
+      ├─ pubspec.yaml
+      └─ lib/
+         ├─ main.dart
+         ├─ api_service.dart
+         └─ chat_screen.dartfastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+python-dotenv==1.0.1
+sqlalchemy==2.0.36
+google-genai>=1.24.0
+pydantic==2.10.4GEMINI_API_KEY=your_google_ai_studio_api_key
+GEMINI_MODEL=gemini-3.5-flash-lite
+DATABASE_URL=sqlite:///./jihad_chatbot.db
+ALLOWED_ORIGINS=http://localhost:5173import os
 
-<div class="ov" id="ov"><div class="modal">
-  <h3>⚙ সেটিংস</h3>
-  <label for="key">Gemini API Key</label>
-  <input type="password" id="key" placeholder="AIza…" autocomplete="off">
-  <div class="help">ফ্রি কী নিন: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>। কী শুধু আপনার ডিভাইসে সংরক্ষিত থাকে।</div>
-  <label for="model">মডেল</label>
-  <select id="model"><option value="gemini-2.5-flash">Gemini 2.5 Flash (দ্রুত)</option><option value="gemini-2.5-pro">Gemini 2.5 Pro (শক্তিশালী)</option><option value="gemini-2.0-flash">Gemini 2.0 Flash</option></select>
-  <label for="lang">ভয়েস ভাষা</label>
-  <select id="lang"><option value="bn-BD">বাংলা</option><option value="en-US">English</option></select>
-  <label class="chk"><input type="checkbox" id="web"> ইন্টারনেট সার্চ চালু (Google Search)</label>
-  <label class="chk"><input type="checkbox" id="auto"> উত্তর নিজে নিজে পড়ে শোনাও</label>
-  <label for="persona">AI ব্যক্তিত্ব (System Prompt)</label>
-  <textarea id="persona"></textarea>
-  <div class="mb"><button id="rst">ডিফল্ট ব্যক্তিত্ব</button><button id="cancel">বাতিল</button><button class="pri" id="save">সংরক্ষণ</button></div>
-</div></div>
-<div id="toast"></div>
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-<script>
-const $=s=>document.querySelector(s);
-const DEF_PERSONA="তুমি JIHAD CHAT BOT PERSONAL ASSISTANT — জিহাদের ব্যক্তিগত AI সহকারী।\n- ব্যবহারকারী যে ভাষায় লেখে (বাংলা বা English) সেই ভাষাতেই উত্তর দাও।\n- বন্ধুসুলভ, বিনয়ী, স্পষ্ট ও নির্ভুল হও; অপ্রয়োজনীয় ভূমিকা এড়াও।\n- জটিল বিষয় ধাপে ধাপে সহজ করে বোঝাও, দরকারে উদাহরণ দাও।\n- ছবি, PDF বা ফাইল দিলে মনোযোগ দিয়ে বিশ্লেষণ করে উত্তর দাও।\n- নিশ্চিত না হলে সেটা সৎভাবে জানাও, বানিয়ে বলো না।";
-const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
-let cfg=Object.assign({key:'',model:'gemini-2.5-flash',lang:'bn-BD',web:true,auto:false,persona:DEF_PERSONA,theme:matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'},load('jcb_cfg',{}));
-let chats=load('jcb_chats',[]),cur=null,pend=[],busy=false,ctrl=null,rec=null;
-const mem={}; // attachment data kept in memory only (localStorage-safe)
-const save=()=>{try{localStorage.setItem('jcb_chats',JSON.stringify(chats.map(c=>({...c,messages:c.messages.map(m=>({...m,files:(m.files||[]).map(({name,mime,kind})=>({name,mime,kind}))}))}))))}catch(e){toast('স্টোরেজ ভর্তি — পুরনো চ্যাট মুছুন')}};
-const saveCfg=()=>localStorage.setItem('jcb_cfg',JSON.stringify(cfg));
-const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2600)};
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-const chat=()=>chats.find(c=>c.id===cur);
-document.documentElement.dataset.theme=cfg.theme;
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./jihad_chatbot.db")
 
-/* ---------- History ---------- */
-function renderHist(){
-  $('#hist').innerHTML='';
-  chats.slice().sort((a,b)=>b.t-a.t).forEach(c=>{
-    const d=document.createElement('div');d.className='hi'+(c.id===cur?' on':'');
-    d.innerHTML='<span></span><button aria-label="মুছুন">✕</button>';
-    d.firstChild.textContent=c.title;
-    d.onclick=()=>{openChat(c.id);closeSide()};
-    d.lastChild.onclick=e=>{e.stopPropagation();if(!confirm('এই চ্যাট মুছবেন?'))return;chats=chats.filter(x=>x.id!==c.id);save();if(cur===c.id)newChat();else renderHist()};
-    $('#hist').append(d);
-  });
-}
-function newChat(){cur=null;pend=[];renderPend();render();renderHist();$('#title').textContent='নতুন চ্যাট';$('#in').focus()}
-function openChat(id){cur=id;render();renderHist();$('#title').textContent=chat().title}
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+    if DATABASE_URL.startswith("sqlite")
+    else {},
+)
 
-/* ---------- Rendering ---------- */
-marked.setOptions({breaks:true,gfm:true});
-const md=t=>DOMPurify.sanitize(marked.parse(t||''),{ADD_ATTR:['target']});
-function bubble(m,i){
-  const w=document.createElement('div');w.className='m '+m.role;
-  const b=document.createElement('div');b.className='b';
-  if(m.role==='user'){
-    if(m.files?.length){const f=document.createElement('div');f.className='fl';
-      m.files.forEach(x=>{if(x.kind==='image'&&mem[x.id]){const im=new Image();im.src='data:'+x.mime+';base64,'+mem[x.id];f.append(im)}else{const s=document.createElement('span');s.className='tag';s.textContent='📄 '+x.name;f.append(s)}});b.append(f)}
-    b.append(document.createTextNode(m.text||''));w.append(b);
-  }else{
-    const c=document.createElement('div');c.className='md';c.innerHTML=m.text?md(m.text):'<div class="dots"><span></span><span></span><span></span></div>';b.append(c);
-    if(m.sources?.length){const s=document.createElement('div');s.className='src';s.append('🌐 সূত্র:');m.sources.forEach(x=>{const a=document.createElement('a');a.href=x.uri;a.target='_blank';a.rel='noopener';a.textContent=x.title||x.uri;s.append(a)});b.append(s)}
-    const col=document.createElement('div');col.style.minWidth='0';col.append(b);
-    if(m.text){const a=document.createElement('div');a.className='act';
-      a.innerHTML='<button data-a="copy">📋 কপি</button><button data-a="speak">🔊 শুনুন</button>';
-      a.onclick=e=>{const k=e.target.dataset.a;if(k==='copy'){navigator.clipboard.writeText(m.text);toast('কপি হয়েছে')}if(k==='speak')speak(m.text)};col.append(a)}
-    w.append(col);addCopy(b);
-  }
-  return w;
-}
-function addCopy(root){root.querySelectorAll('pre').forEach(p=>{if(p.querySelector('.cp'))return;const x=document.createElement('button');x.className='cp';x.textContent='কপি';x.onclick=()=>{navigator.clipboard.writeText(p.innerText.replace(/কপি$/,''));x.textContent='✓'; setTimeout(()=>x.textContent='কপি',1200)};p.append(x)})}
-function render(){
-  const L=$('#list');L.innerHTML='';const c=chat();
-  if(!c||!c.messages.length){
-    L.innerHTML='<div class="hero"><h2>আসসালামু আলাইকুম,<br>আজ কীভাবে সাহায্য করব?</h2><p>বাংলা বা English-এ প্রশ্ন করুন, ছবি বা PDF দিন, কিংবা মাইকে কথা বলুন।</p><div class="chips"></div></div>';
-    ['আজকের গুরুত্বপূর্ণ খবর কী?','একটি ইমেইল লিখে দাও','এই PDF সারসংক্ষেপ করো','Explain AI in simple Bangla'].forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{$('#in').value=t;send()};L.querySelector('.chips').append(b)});
-    return}
-  c.messages.forEach((m,i)=>L.append(bubble(m,i)));scrollEnd();
-}
-const scrollEnd=()=>{const e=$('#msgs');e.scrollTop=e.scrollHeight};
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
-/* ---------- Files ---------- */
-const b64=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(f)});
-const txt=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsText(f)});
-async function addFiles(list){
-  for(const f of list){
-    if(f.size>15*1024*1024){toast(f.name+' — ১৫MB এর বেশি');continue}
-    const id=uid();let o={id,name:f.name,mime:f.type||'text/plain'};
-    if(f.type.startsWith('image/')){o.kind='image';mem[id]=await b64(f)}
-    else if(f.type==='application/pdf'){o.kind='pdf';mem[id]=await b64(f)}
-    else{o.kind='text';mem[id]=await txt(f)}
-    pend.push(o);
-  }
-  renderPend();
-}
-function renderPend(){
-  const p=$('#pend');p.innerHTML='';
-  pend.forEach((f,i)=>{const s=document.createElement('span');s.className='tag';
-    if(f.kind==='image'){const im=new Image();im.src='data:'+f.mime+';base64,'+mem[f.id];s.append(im)}else s.append('📄');
-    s.append(' '+f.name.slice(0,22)+' ');const x=document.createElement('button');x.textContent='✕';x.onclick=()=>{pend.splice(i,1);renderPend()};s.append(x);p.append(s)});
-}
-$('#attBtn').onclick=()=>$('#file').click();
-$('#file').onchange=e=>{addFiles([...e.target.files]);e.target.value=''};
-$('#in').addEventListener('paste',e=>{const fs=[...(e.clipboardData?.files||[])];if(fs.length){e.preventDefault();addFiles(fs)}});
 
-/* ---------- Send / Gemini ---------- */
-async function send(){
-  if(busy){ctrl?.abort();return}
-  const input=$('#in'),text=input.value.trim();
-  if(!text&&!pend.length)return;
-  if(!cfg.key){openSet();toast('আগে Gemini API Key দিন');return}
-  stopRec();
-  let c=chat();
-  if(!c){c={id:uid(),title:(text||pend[0].name).slice(0,40),t:Date.now(),messages:[]};chats.push(c);cur=c.id;$('#title').textContent=c.title}
-  c.messages.push({role:'user',text,files:pend});
-  pend=[];renderPend();input.value='';input.style.height='auto';
-  const bot={role:'model',text:'',sources:[]};c.messages.push(bot);c.t=Date.now();
-  render();renderHist();
-  const node=$('#list').lastChild,mdEl=()=>node.querySelector('.md');
-  busy=true;$('#sendBtn').textContent='■';ctrl=new AbortController();
-  const contents=c.messages.slice(0,-1).map(m=>{
-    const parts=[];
-    (m.files||[]).forEach(f=>{
-      if(!mem[f.id])return;
-      if(f.kind==='text')parts.push({text:'[ফাইল: '+f.name+']\n'+mem[f.id]});
-      else parts.push({inline_data:{mime_type:f.mime,data:mem[f.id]}});
-    });
-    parts.push({text:m.text||(m.files?.length?'এই ফাইলটি বিশ্লেষণ করো।':' ')});
-    return{role:m.role,parts};
-  });
-  const body={system_instruction:{parts:[{text:cfg.persona}]},contents};
-  if(cfg.web)body.tools=[{google_search:{}}];
-  try{
-    const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+cfg.model+':streamGenerateContent?alt=sse',{method:'POST',signal:ctrl.signal,headers:{'Content-Type':'application/json','x-goog-api-key':cfg.key},body:JSON.stringify(body)});
-    if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||('HTTP '+r.status))}
-    const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
-    while(true){
-      const{done,value}=await rd.read();if(done)break;
-      buf+=dec.decode(value,{stream:true});
-      const lines=buf.split('\n');buf=lines.pop();
-      for(const l of lines){
-        if(!l.startsWith('data:'))continue;
-        try{const j=JSON.parse(l.slice(5)),cd=j.candidates?.[0];
-          (cd?.content?.parts||[]).forEach(p=>{if(p.text&&!p.thought)bot.text+=p.text});
-          (cd?.groundingMetadata?.groundingChunks||[]).forEach(g=>{if(g.web&&!bot.sources.some(s=>s.uri===g.web.uri))bot.sources.push(g.web)});
-          mdEl().innerHTML=md(bot.text);addCopy(node);scrollEnd();
-        }catch{}
-      }
-    }
-    if(!bot.text)bot.text='⚠ কোনো উত্তর পাওয়া যায়নি (নিরাপত্তা ফিল্টার হতে পারে)। অন্যভাবে লিখে দেখুন।';
-  }catch(e){
-    if(e.name==='AbortError')bot.text=bot.text||'⏹ থামানো হয়েছে।';
-    else bot.text=(bot.text?bot.text+'\n\n':'')+'⚠ ত্রুটি: '+e.message;
-  }
-  busy=false;$('#sendBtn').textContent='➤';ctrl=null;
-  save();render();
-  if(cfg.auto&&bot.text&&!bot.text.startsWith('⚠'))speak(bot.text);
-}
-$('#sendBtn').onclick=send;
-$('#in').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!matchMedia('(pointer:coarse)').matches){e.preventDefault();send()}});
-$('#in').addEventListener('input',e=>{e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,160)+'px'});
+def get_db():
+    db = SessionLocal()
 
-/* ---------- Voice ---------- */
-const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-function stopRec(){if(rec){rec.stop();rec=null}$('#micBtn').classList.remove('on')}
-$('#micBtn').onclick=()=>{
-  if(!SR){toast('এই ব্রাউজারে ভয়েস ইনপুট নেই — Chrome ব্যবহার করুন');return}
-  if(rec){stopRec();return}
-  rec=new SR();rec.lang=cfg.lang;rec.interimResults=true;rec.continuous=true;
-  const base=$('#in').value;
-  rec.onresult=e=>{let s='';for(const r of e.results)s+=r[0].transcript;$('#in').value=(base?base+' ':'')+s;$('#in').dispatchEvent(new Event('input'))};
-  rec.onerror=e=>{toast('মাইক ত্রুটি: '+e.error);stopRec()};
-  rec.onend=()=>{$('#micBtn').classList.remove('on');rec=null};
-  rec.start();$('#micBtn').classList.add('on');
-};
-function speak(t){
-  if(!('speechSynthesis' in window)){toast('এই ডিভাইসে ভয়েস আউটপুট নেই');return}
-  speechSynthesis.cancel();
-  const clean=t.replace(/```[\s\S]*?```/g,' ').replace(/[*_#`>\[\]]/g,'').replace(/\(https?:[^)]+\)/g,'');
-  const u=new SpeechSynthesisUtterance(clean);u.lang=/[\u0980-\u09FF]/.test(clean)?'bn-BD':'en-US';speechSynthesis.speak(u);
-}
-
-/* ---------- Settings & UI ---------- */
-function openSet(){
-  $('#key').value=cfg.key;$('#model').value=cfg.model;$('#lang').value=cfg.lang;$('#web').checked=cfg.web;$('#auto').checked=cfg.auto;$('#persona').value=cfg.persona;
-  $('#ov').classList.add('show');
-}
-$('#setBtn').onclick=()=>{openSet();closeSide()};
-$('#cancel').onclick=()=>$('#ov').classList.remove('show');
-$('#rst').onclick=()=>$('#persona').value=DEF_PERSONA;
-$('#save').onclick=()=>{
-  cfg.key=$('#key').value.trim();cfg.model=$('#model').value;cfg.lang=$('#lang').value;cfg.web=$('#web').checked;cfg.auto=$('#auto').checked;cfg.persona=$('#persona').value.trim()||DEF_PERSONA;
-  saveCfg();$('#ov').classList.remove('show');toast('সংরক্ষিত হয়েছে ✓');
-};
-$('#ov').onclick=e=>{if(e.target.id==='ov')$('#ov').classList.remove('show')};
-$('#themeBtn').onclick=()=>{cfg.theme=cfg.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=cfg.theme;saveCfg()};
-$('#newBtn').onclick=()=>{newChat();closeSide()};
-$('#clrBtn').onclick=()=>{if(confirm('সব চ্যাট হিস্টোরি মুছে ফেলবেন?')){chats=[];save();newChat();closeSide()}};
-const closeSide=()=>{$('#side').classList.remove('open');$('#scrim').classList.remove('show')};
-$('#menuBtn').onclick=()=>{$('#side').classList.add('open');$('#scrim').classList.add('show')};
-$('#scrim').onclick=closeSide;
-render();renderHist();
-if(!cfg.key)setTimeout(openSet,400);
-</script>
-</body>
-</html>
+    try:
+        yield db
+    finally:
+        db.close()
