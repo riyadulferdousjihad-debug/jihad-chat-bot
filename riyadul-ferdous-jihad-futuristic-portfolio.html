@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080612">
+<meta name="description" content="Riyadul Ferdous Jihad — Web Developer and Designer from Kushtia, Bangladesh. Discover my digital profile and connect.">
+<title>Riyadul Ferdous Jihad | Digital Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080612;--panel:#110d20;--panel2:#17112b;--text:#f7f3ff;--muted:#aaa2bd;--purple:#a855f7;--pink:#ec4899;--cyan:#67e8f9;--line:rgba(221,190,255,.15);--glow:0 0 35px rgba(168,85,247,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(ellipse at 15% 15%,rgba(110,45,190,.22),transparent 38%),radial-gradient(ellipse at 85% 45%,rgba(26,117,157,.12),transparent 35%),radial-gradient(ellipse at 50% 100%,rgba(167,46,137,.12),transparent 35%)}
+#particles{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.48}
+a{color:inherit;text-decoration:none}.container{width:min(1140px,calc(100% - 44px));margin:auto}
+header{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:5}
+.logo{font:700 21px "Space Grotesk";letter-spacing:-1px}.logo b{color:var(--purple)}.logo-mark{display:inline-grid;place-items:center;width:34px;height:34px;margin-right:8px;border:1px solid #b66cff77;border-radius:11px;background:linear-gradient(145deg,#a855f733,#ec489922);color:#d9b5ff;box-shadow:var(--glow)}
+nav{display:flex;gap:29px;color:#c9c0d8;font-size:13px}nav a{transition:.2s}nav a:hover,nav a.active{color:#d8a8ff}
+.nav-btn,.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:12px 19px;font-size:13px;font-weight:700;transition:.25s;cursor:pointer}
+.nav-btn,.btn.primary{color:white;background:linear-gradient(100deg,#8538d9,#d13eaa);box-shadow:0 8px 30px #a855f733;border:1px solid #ffffff18}.nav-btn:hover,.btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px #a855f755}
+.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:10px;padding:9px;font-size:20px}
+.hero{min-height:690px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:48px;padding:70px 0 85px;border-bottom:1px solid var(--line)}
+.pill{display:inline-flex;align-items:center;gap:9px;border:1px solid #b76aff55;background:#a855f711;color:#d7adff;padding:9px 14px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.pulse{width:7px;height:7px;border-radius:50%;background:#c084fc;box-shadow:0 0 12px #c084fc;animation:pulse 1.8s infinite}@keyframes pulse{50%{opacity:.35;transform:scale(.7)}}
+h1{font:700 clamp(45px,6.2vw,76px)/1.04 "Space Grotesk";letter-spacing:-3.7px;margin:25px 0 17px}h1 .shine{background:linear-gradient(100deg,#d8b4fe 5%,#a855f7 48%,#f0abfc 85%);background-clip:text;-webkit-background-clip:text;color:transparent}
+.role{font:600 clamp(17px,2vw,22px) "Space Grotesk";color:#e9d5ff;margin-bottom:18px}.role span{color:#c084fc}
+.lead{color:var(--muted);font-size:15px;line-height:1.9;max-width:550px;margin:0 0 29px}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn.outline{border:1px solid #c084fc66;background:#ffffff06;color:#eadcff}.btn.outline:hover{border-color:#d8b4fe}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:35px;color:#aaa2bd;font-size:11px}.hero-meta span{display:flex;align-items:center;gap:7px}.hero-meta i{color:#c084fc;font-style:normal}
+.scene{height:480px;position:relative;display:grid;place-items:center;perspective:1000px;isolation:isolate}
+.ring{position:absolute;width:350px;height:350px;border:1px solid #a855f766;border-radius:50%;transform:rotateX(68deg) rotateZ(-20deg);box-shadow:0 0 45px #a855f722,inset 0 0 35px #a855f711;animation:orbit 16s linear infinite}
+.ring:before,.ring:after{content:"";position:absolute;inset:24px;border:1px solid #67e8f944;border-radius:50%}.ring:after{inset:-22px;border-color:#ec489966}@keyframes orbit{to{transform:rotateX(68deg) rotateZ(340deg)}}
+.core{width:265px;height:320px;position:relative;transform-style:preserve-3d;transition:transform .18s ease-out}
+.core-card{position:absolute;inset:0;border:1px solid #c084fc66;border-radius:30px;background:linear-gradient(145deg,rgba(42,25,68,.94),rgba(13,14,31,.96));box-shadow:0 25px 90px #0009,0 0 50px #9b4de933,inset 0 1px #ffffff22;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transform:translateZ(28px)}
+.core-card:before{content:"";position:absolute;width:240px;height:240px;top:-110px;right:-80px;border-radius:50%;background:#a855f733;filter:blur(22px)}
+.monogram{width:126px;height:126px;display:grid;place-items:center;border-radius:36px;border:1px solid #e9d5ff88;background:linear-gradient(145deg,#a855f7,#4c1d95 65%,#111827);font:700 57px "Space Grotesk";letter-spacing:-7px;color:white;text-shadow:0 4px 18px #1e0a37;box-shadow:0 12px 50px #a855f755, inset 0 2px 12px #ffffff55;transform:translateZ(45px);position:relative}
+.core-card h2{font:600 21px "Space Grotesk";text-align:center;line-height:1.25;margin:23px 0 5px;transform:translateZ(35px)}.core-card p{margin:0;color:#c4b5d8;font-size:12px;transform:translateZ(25px)}
+.orbit-label{position:absolute;border:1px solid #ffffff20;background:#17112bdf;backdrop-filter:blur(12px);padding:11px 14px;border-radius:13px;color:#e9d5ff;font-size:11px;box-shadow:0 12px 35px #0006;animation:float 5s ease-in-out infinite}
+.label-a{top:55px;right:0}.label-b{bottom:65px;left:0;animation-delay:-2.5s}.label-c{top:45%;left:0;animation-delay:-1.3s}
+@keyframes float{50%{transform:translateY(-13px) rotate(2deg)}}
+.section{padding:88px 0;border-bottom:1px solid var(--line)}.kicker{font-size:11px;color:#d0a2ff;letter-spacing:2.5px;font-weight:700;text-transform:uppercase}.section-title{font:600 clamp(31px,4vw,46px)/1.15 "Space Grotesk";letter-spacing:-1.7px;margin:13px 0 14px}.section-copy{max-width:690px;color:var(--muted);font-size:14px;line-height:1.9;margin:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.glass{background:linear-gradient(145deg,#1c1430cc,#100d1ecc);border:1px solid var(--line);border-radius:23px;padding:27px;box-shadow:0 18px 55px #0003;backdrop-filter:blur(12px)}
+.detail{display:flex;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid var(--line);font-size:12px}.detail:last-child{border:0}.detail span{color:var(--muted)}.detail strong{text-align:right;font-weight:600;overflow-wrap:anywhere}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:35px}.feature{padding:25px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#1b1430aa,#100d1a88);min-height:190px;transition:.3s;transform-style:preserve-3d}.feature:hover{transform:translateY(-8px) rotateX(3deg) rotateY(-3deg);border-color:#c084fc77;box-shadow:0 18px 45px #8b3fd422}.feature-icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;background:#a855f722;border:1px solid #c084fc44;color:#dfbaff;font-size:20px}.feature h3{font:600 16px "Space Grotesk";margin:17px 0 7px}.feature p{color:var(--muted);font-size:12px;line-height:1.8;margin:0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}.contact-list{padding:17px 25px}.contact-item{display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);font-size:13px}.contact-item:last-child{border:0}.contact-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#a855f722;color:#d8b4fe;font-size:17px}.contact-item small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}.contact-item strong{font-weight:600;overflow-wrap:anywhere}.contact-item:hover strong{color:#d8b4fe}
+footer{padding:27px 0;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#827991;font-size:11px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.show{opacity:1;transform:translateY(0)}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:60px;gap:15px}.scene{height:430px}.about-grid,.contact-grid{grid-template-columns:1fr;gap:28px}.cards{grid-template-columns:1fr 1fr}nav{display:none}.menu{display:block}.nav-btn{display:none}.mobile-nav{display:none;position:absolute;top:72px;left:0;right:0;padding:18px;background:#100c1e;border:1px solid var(--line);border-radius:16px;flex-direction:column;gap:16px}.mobile-nav.open{display:flex}.mobile-nav a{color:#e9d5ff;font-size:14px}}
+@media(max-width:560px){.container{width:min(100% - 30px,1140px)}h1{letter-spacing:-2.5px}.hero{padding:54px 0 60px}.scene{height:390px}.core{transform:scale(.88)}.ring{width:290px;height:290px}.label-a{right:-2px}.label-b{left:-2px}.label-c{left:-5px}.cards{grid-template-columns:1fr}.section{padding:68px 0}.detail{align-items:flex-start}.detail strong{max-width:62%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="container">
+<header>
+  <a class="logo" href="#home"><span class="logo-mark">RJ</span>Jihad<b>.</b></a>
+  <nav aria-label="Main navigation"><a class="active" href="#home">Home</a><a href="#about">About</a><a href="#focus">Expertise</a><a href="#contact">Contact</a></nav>
+  <a class="nav-btn" href="#contact">Let's Connect <span>↗</span></a>
+  <button class="menu" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <div class="mobile-nav" id="mobileNav"><a href="#home">Home</a><a href="#about">About</a><a href="#focus">Expertise</a><a href="#contact">Contact</a></div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="reveal">
+    <div class="pill"><span class="pulse"></span> Welcome to my digital space</div>
+    <h1>Riyadul Ferdous<br><span class="shine">Jihad.</span></h1>
+    <div class="role">Web Developer <span>|</span> Designer</div>
+    <p class="lead">I’m passionate about building engaging digital experiences and exploring the creative side of technology. From thoughtful interfaces to purposeful web experiences, I love turning ideas into something meaningful.</p>
+    <div class="actions"><a class="btn primary" href="#contact">Let's Talk <span>↗</span></a><a class="btn outline" href="#about">Discover More <span>↓</span></a></div>
+    <div class="hero-meta"><span><i>⌖</i> Kushtia, Bangladesh</span><span><i>✦</i> Creative & Curious</span><span><i>◉</i> Open to Connections</span></div>
+  </div>
+  <div class="scene reveal" id="scene">
+    <div class="ring"></div>
+    <div class="core" id="tiltCard">
+      <div class="core-card">
+        <div class="monogram">RJ</div>
+        <h2>Riyadul Ferdous<br>Jihad</h2>
+        <p>Web Developer · Designer</p>
+      </div>
+    </div>
+    <div class="orbit-label label-a">✧ Digital Creativity</div>
+    <div class="orbit-label label-b">⌘ Design with Purpose</div>
+    <div class="orbit-label label-c">✦ Always Learning</div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="reveal"><div class="kicker">01 / ABOUT ME</div><h2 class="section-title">A curious mind.<br>A creative approach.</h2>
+      <p class="section-copy">My name is Riyadul Ferdous Jihad, and I’m based in Kushtia, Bangladesh. I’m a Web Developer and Designer with a strong interest in digital creativity. I enjoy learning, experimenting with ideas, and creating online experiences that feel intuitive, polished, and memorable.</p>
+    </div>
+    <div class="glass reveal">
+      <div class="detail"><span>Full Name</span><strong>Riyadul Ferdous Jihad</strong></div>
+      <div class="detail"><span>Profession</span><strong>Web Developer | Designer</strong></div>
+      <div class="detail"><span>Location</span><strong>Kushtia, Bangladesh</strong></div>
+      <div class="detail"><span>Email</span><strong>riyadulferdousjihad@gmail.com</strong></div>
+      <div class="detail"><span>Focus</span><strong>Web & Digital Design</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="focus">
+  <div class="reveal"><div class="kicker">02 / WHAT I DO</div><h2 class="section-title">Where creativity meets technology.</h2><p class="section-copy">I’m interested in the details that make digital experiences useful, beautiful, and enjoyable.</p></div>
+  <div class="cards">
+    <article class="feature reveal"><div class="feature-icon">⌘</div><h3>Web Development</h3><p>Exploring modern web technologies to build responsive, accessible, and user-friendly experiences.</p></article>
+    <article class="feature reveal"><div class="feature-icon">✧</div><h3>Digital Design</h3><p>Bringing structure and visual clarity together through clean layouts and thoughtful interface design.</p></article>
+    <article class="feature reveal"><div class="feature-icon">↗</div><h3>Continuous Learning</h3><p>Staying curious, developing new skills, and discovering better ways to bring ideas to life.</p></article>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="contact-grid">
+    <div class="reveal"><div class="kicker">03 / GET IN TOUCH</div><h2 class="section-title">Let's create<br>something meaningful.</h2><p class="section-copy">Have a question, an idea, or an opportunity to connect? Feel free to reach out through any of the channels. I’d be glad to hear from you.</p><div style="margin-top:25px"><a class="btn primary" href="mailto:riyadulferdousjihad@gmail.com">Send an Email ↗</a></div></div>
+    <div class="glass contact-list reveal">
+      <a class="contact-item" href="mailto:riyadulferdousjihad@gmail.com"><span class="contact-icon">✉</span><span><small>Email</small><strong>riyadulferdousjihad@gmail.com</strong></span></a>
+      <a class="contact-item" href="https://wa.me/8801608213157" target="_blank" rel="noopener noreferrer"><span class="contact-icon">◉</span><span><small>WhatsApp</small><strong>+880 1608-213157</strong></span></a>
+      <a class="contact-item" href="https://www.facebook.com/share/1E9EtyukP6/" target="_blank" rel="noopener noreferrer"><span class="contact-icon">f</span><span><small>Facebook</small><strong>Connect on Facebook ↗</strong></span></a>
+      <a class="contact-item" href="https://www.instagram.com/jihad_islam_999?rpxt=MWxjNjdpcDJjbzR4dQ==" target="_blank" rel="noopener noreferrer"><span class="contact-icon">◎</span><span><small>Instagram</small><strong>Follow on Instagram ↗</strong></span></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer><span>© <span id="year"></span> Riyadul Ferdous Jihad. All rights reserved.</span><span>Designed with curiosity · Kushtia, Bangladesh</span></footer>
+</div>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+const menuBtn=document.getElementById('menuBtn'),mobileNav=document.getElementById('mobileNav');
+menuBtn.addEventListener('click',()=>{const open=mobileNav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'✕':'☰'});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
+const tilt=document.getElementById('tiltCard'),scene=document.getElementById('scene');
+if(matchMedia('(pointer:fine)').matches){scene.addEventListener('pointermove',e=>{const r=scene.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;tilt.style.transform=`rotateY(${x*18}deg) rotateX(${-y*16}deg)`});scene.addEventListener('pointerleave',()=>tilt.style.transform='rotateY(0) rotateX(0)')}
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show');observer.unobserve(entry.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+// Lightweight decorative particle field; automatically scales down on small screens.
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');let dots=[],w,h;
+function resize(){const dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.min(65,Math.floor(w/18));dots=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.35,v:Math.random()*.22+.06,a:Math.random()*.45+.12}))}
+function draw(){ctx.clearRect(0,0,w,h);for(const p of dots){p.y-=p.v;if(p.y<0){p.y=h;p.x=Math.random()*w}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(204,155,255,${p.a})`;ctx.fill()}requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+</script>
+</body>
+</html>
