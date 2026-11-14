@@ -1,59 +1,131 @@
-jihad-chatbot/
-├─ backend/
-│  ├─ main.py
-│  ├─ database.py
-│  ├─ models.py
-│  ├─ schemas.py
-│  ├─ gemini_service.py
-│  ├─ requirements.txt
-│  ├─ .env.example
-│  └─ uploads/
-├─ web/
-│  ├─ package.json
-│  ├─ vite.config.js
-│  ├─ index.html
-│  └─ src/
-│     ├─ main.jsx
-│     ├─ App.jsx
-│     ├─ api.js
-│     └─ styles.css
-└─ android/
-   └─ jihad_chatbot/
-      ├─ pubspec.yaml
-      └─ lib/
-         ├─ main.dart
-         ├─ api_service.dart
-         └─ chat_screen.dartfastapi==0.115.6
-uvicorn[standard]==0.34.0
-python-multipart==0.0.20
-python-dotenv==1.0.1
-sqlalchemy==2.0.36
-google-genai>=1.24.0
-pydantic==2.10.4GEMINI_API_KEY=your_google_ai_studio_api_key
-GEMINI_MODEL=gemini-3.5-flash-lite
-DATABASE_URL=sqlite:///./jihad_chatbot.db
-ALLOWED_ORIGINS=http://localhost:5173import os
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090d18" />
+  <meta name="description" content="Riyadul Ferdous Jihad — Web Developer and Designer based in Kushtia, Bangladesh. Explore my profile and get in touch." />
+  <title>Riyadul Ferdous Jihad | Web Developer & Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#090d18;--panel:#111827;--muted:#9aa7bb;--text:#f4f7fb;--accent:#79f2c0;--accent2:#83a8ff;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 78% 8%,rgba(87,116,255,.16),transparent 32%),radial-gradient(ellipse at 10% 50%,rgba(65,231,177,.09),transparent 30%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 44px));margin:auto}
+    nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+    .brand{font:700 19px "Space Grotesk";letter-spacing:-.6px}.brand span{color:var(--accent)}
+    .navlinks{display:flex;gap:30px;color:#c1cada;font-size:13px}.navlinks a:hover{color:var(--accent)}
+    .nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:12px 19px;font-weight:700;font-size:13px;transition:.2s}
+    .nav-cta,.btn.primary{background:var(--accent);color:#07130f}.nav-cta:hover,.btn.primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px #79f2c033}
+    .hero{min-height:690px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:50px;padding:76px 0 90px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #79f2c044;background:#79f2c00d;color:var(--accent);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:700;letter-spacing:.5px}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+    h1{font:700 clamp(44px,6.5vw,78px)/1.04 "Space Grotesk";letter-spacing:-4px;margin:24px 0 18px}
+    h1 .gradient{background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .intro{max-width:570px;color:var(--muted);font-size:17px;line-height:1.85;margin:0 0 30px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}.btn.secondary{border:1px solid var(--line);background:#ffffff08}.btn.secondary:hover{border-color:var(--accent);transform:translateY(-3px)}
+    .hero-note{display:flex;align-items:center;gap:12px;margin-top:42px;color:var(--muted);font-size:12px}.note-line{height:1px;width:45px;background:var(--accent)}
+    .visual{position:relative;min-height:430px;display:grid;place-items:center}
+    .orbit{position:absolute;width:340px;height:340px;border:1px solid #ffffff16;border-radius:50%;box-shadow:0 0 80px #6c8dff12}
+    .orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #ffffff12;border-radius:50%;inset:28px}.orbit:after{inset:58px}
+    .profile-card{position:relative;width:min(330px,90%);padding:30px;border:1px solid #ffffff20;border-radius:28px;background:linear-gradient(145deg,#1b2940eF,#101725ee);box-shadow:0 30px 90px #0008;backdrop-filter:blur(16px);transform:rotate(-3deg)}
+    .avatar{width:76px;height:76px;border-radius:23px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#08131a;font:700 26px "Space Grotesk";margin-bottom:23px}
+    .profile-card h2{font:600 23px "Space Grotesk";margin:0 0 4px}.profile-card p{color:var(--muted);margin:0;font-size:13px}
+    .mini-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:23px}.mini-tags span{font-size:11px;padding:7px 10px;border:1px solid var(--line);border-radius:99px;color:#d6deea}
+    .float-tag{position:absolute;padding:11px 15px;border:1px solid #ffffff20;border-radius:14px;background:#172237;color:#dce7f5;font-size:12px;box-shadow:0 12px 35px #0005}.tag-one{top:54px;right:0}.tag-two{bottom:55px;left:0}
+    section{padding:78px 0;border-top:1px solid var(--line)}.section-kicker{color:var(--accent);font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase}
+    h2.section-title{font:600 clamp(30px,4vw,44px)/1.15 "Space Grotesk";letter-spacing:-1.5px;margin:12px 0 14px}.section-copy{color:var(--muted);max-width:650px;margin:0}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}.info-card{background:linear-gradient(145deg,#151f31,#0e1522);border:1px solid var(--line);border-radius:22px;padding:26px}
+    .info-row{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--line);font-size:13px}.info-row:last-child{border:0;padding-bottom:0}.info-row span:first-child{color:var(--muted)}.info-row strong{text-align:right;font-weight:600}
+    .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}.value-card{padding:23px;border:1px solid var(--line);border-radius:18px;background:#ffffff05}.value-card .num{font:600 25px "Space Grotesk";color:var(--accent)}.value-card h3{font:600 16px "Space Grotesk";margin:12px 0 5px}.value-card p{font-size:12px;color:var(--muted);margin:0}
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.contact-card{border:1px solid var(--line);border-radius:24px;padding:27px;background:linear-gradient(145deg,#17243a,#101725)}
+    .contact-link{display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid var(--line);font-size:13px}.contact-link:last-child{border:0}.contact-link small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase}.contact-link strong{font-weight:600;overflow-wrap:anywhere}.contact-link:hover strong{color:var(--accent)}
+    footer{padding:27px 0;color:#8190a6;font-size:11px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;padding:65px 0 55px;gap:20px}.visual{min-height:370px}.about-grid,.contact{grid-template-columns:1fr;gap:28px}.values{grid-template-columns:1fr}.navlinks{display:none}h1{letter-spacing:-2.5px}.tag-one{right:5%}.tag-two{left:3%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#home">JIHAD<span>.</span></a>
+      <div class="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#focus">What I Do</a><a href="#contact">Contact</a></div>
+      <a class="nav-cta" href="#contact">Let's Connect ↗</a>
+    </nav>
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+    <main>
+      <section class="hero" id="home" style="border:0">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> AVAILABLE FOR CREATIVE COLLABORATIONS</div>
+          <h1>Crafting Digital<br><span class="gradient">Experiences.</span></h1>
+          <p class="intro">Hi, I'm <strong>Riyadul Ferdous Jihad</strong> — a Web Developer and Designer based in Kushtia, Bangladesh. I’m passionate about creating thoughtful digital experiences that bring ideas to life through clean design and purposeful technology.</p>
+          <div class="actions">
+            <a class="btn primary" href="mailto:riyadulferdousjihad@gmail.com">Get in Touch ↗</a>
+            <a class="btn secondary" href="#about">Explore My Profile ↓</a>
+          </div>
+          <div class="hero-note"><span class="note-line"></span> DESIGN MINDED. DETAIL FOCUSED. ALWAYS LEARNING.</div>
+        </div>
+        <div class="visual" aria-label="Personal profile illustration">
+          <div class="orbit"></div>
+          <div class="profile-card">
+            <div class="avatar">RJ</div>
+            <h2>Riyadul Ferdous<br>Jihad</h2>
+            <p>Web Developer <span style="color:var(--accent)">·</span> Designer</p>
+            <div class="mini-tags"><span>Web Development</span><span>UI Design</span><span>Creative Thinking</span></div>
+          </div>
+          <div class="float-tag tag-one">✦ Digital Creativity</div>
+          <div class="float-tag tag-two">⌖ Kushtia, Bangladesh</div>
+        </div>
+      </section>
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./jihad_chatbot.db")
+      <section id="about">
+        <div class="about-grid">
+          <div>
+            <div class="section-kicker">A LITTLE ABOUT ME</div>
+            <h2 class="section-title">Curiosity drives<br>what I create.</h2>
+            <p class="section-copy">I’m based in Kushtia, Bangladesh, with an interest in web development and digital design. I enjoy exploring ideas, learning new skills, and shaping simple concepts into polished online experiences. My goal is to make every project feel clear, useful, and memorable.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-row"><span>Full Name</span><strong>Riyadul Ferdous Jihad</strong></div>
+            <div class="info-row"><span>Profession</span><strong>Web Developer & Designer</strong></div>
+            <div class="info-row"><span>Location</span><strong>Kushtia, Bangladesh</strong></div>
+            <div class="info-row"><span>Email</span><strong>riyadulferdousjihad@gmail.com</strong></div>
+            <div class="info-row"><span>Availability</span><strong>Open to Conversations</strong></div>
+          </div>
+        </div>
+      </section>
 
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False}
-    if DATABASE_URL.startswith("sqlite")
-    else {},
-)
+      <section id="focus">
+        <div class="section-kicker">MY CREATIVE FOCUS</div>
+        <h2 class="section-title">Ideas into digital experiences.</h2>
+        <p class="section-copy">A few principles that guide the way I approach digital work.</p>
+        <div class="values">
+          <article class="value-card"><div class="num">01</div><h3>Web Development</h3><p>Building purposeful web experiences with a focus on clarity, usability, and responsive design.</p></article>
+          <article class="value-card"><div class="num">02</div><h3>Visual Design</h3><p>Creating clean, modern interfaces with thoughtful layouts and attention to detail.</p></article>
+          <article class="value-card"><div class="num">03</div><h3>Continuous Growth</h3><p>Staying curious, learning continuously, and finding better ways to turn ideas into reality.</p></article>
+        </div>
+      </section>
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-
-def get_db():
-    db = SessionLocal()
-
-    try:
-        yield db
-    finally:
-        db.close()
+      <section id="contact">
+        <div class="contact">
+          <div>
+            <div class="section-kicker">LET'S CONNECT</div>
+            <h2 class="section-title">Have an idea?<br>Let's make it happen.</h2>
+            <p class="section-copy">Whether you have a project in mind, want to collaborate, or simply want to say hello, feel free to reach out. I’d be happy to connect.</p>
+            <div style="margin-top:25px"><a class="btn primary" href="mailto:riyadulferdousjihad@gmail.com">Start a Conversation ↗</a></div>
+          </div>
+          <div class="contact-card">
+            <a class="contact-link" href="mailto:riyadulferdousjihad@gmail.com"><span>✉</span><div><small>Email</small><strong>riyadulferdousjihad@gmail.com</strong></div></a>
+            <a class="contact-link" href="https://wa.me/8801608213157" target="_blank" rel="noopener noreferrer"><span>◉</span><div><small>WhatsApp</small><strong>+880 1608-213157</strong></div></a>
+            <a class="contact-link" href="https://www.facebook.com/share/1E9EtyukP6/" target="_blank" rel="noopener noreferrer"><span>f</span><div><small>Facebook</small><strong>Connect on Facebook ↗</strong></div></a>
+            <a class="contact-link" href="https://www.instagram.com/jihad_islam_999?rpxt=MWxjNjdpcDJjbzR4dQ==" target="_blank" rel="noopener noreferrer"><span>◎</span><div><small>Instagram</small><strong>Follow on Instagram ↗</strong></div></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer><span>© <span id="year"></span> Riyadul Ferdous Jihad. All rights reserved.</span><span>Designed with purpose · Kushtia, Bangladesh</span></footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
